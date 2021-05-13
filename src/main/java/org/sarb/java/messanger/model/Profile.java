@@ -3,14 +3,21 @@ package org.sarb.java.messanger.model;
 import java.util.Date;
 
 public class Profile {
+
 	private long id;
+	private String profileName;
 	private String firstName;
 	private String lastName;
 	private Date created;
 
-	public Profile(long id, String firstName, String lastName) {
+	public Profile() {
+		super();
+	}
+
+	public Profile(long id, String profileName, String firstName, String lastName) {
 		super();
 		this.id = id;
+		this.profileName = profileName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.created = new Date();
@@ -22,6 +29,14 @@ public class Profile {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	public String getFirstName() {
