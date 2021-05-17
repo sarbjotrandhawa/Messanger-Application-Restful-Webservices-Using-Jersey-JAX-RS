@@ -1,25 +1,18 @@
 package org.sarb.java.messanger.model;
 
 import java.util.Date;
-import java.util.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-@XmlRootElement
-public class Message {
-
-	private Long id;
+public class Comment {
+	private long id;
 	private String message;
 	private Date created;
 	private String author;
-	private Map<Long, Comment> comments = new HashMap<>();
 
-	public Message() {
+	public Comment() {
 		super();
 	}
 
-	public Message(Long id, String message, String author) {
+	public Comment(long id, String message, String author) {
 		super();
 		this.id = id;
 		this.message = message;
@@ -27,11 +20,11 @@ public class Message {
 		this.author = author;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -57,15 +50,6 @@ public class Message {
 
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	@XmlTransient
-	public Map<Long, Comment> getComments() {
-		return comments;
-	}
-
-	public void setComments(Map<Long, Comment> comments) {
-		this.comments = comments;
 	}
 
 }

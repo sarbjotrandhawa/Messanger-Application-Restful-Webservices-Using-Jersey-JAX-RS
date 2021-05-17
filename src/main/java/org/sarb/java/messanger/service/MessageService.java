@@ -1,6 +1,7 @@
 package org.sarb.java.messanger.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,27 @@ public class MessageService {
 
 	public Message removeMessage(long id) {
 		return messages.remove(id);
+	}
+
+	public List<Message> getAllMessages(int year) {
+		List<Message> list = new ArrayList<Message>();
+		Calendar cal = Calendar.getInstance();
+
+		for (Message message : messages.values()) {
+			cal.setTime(message.getCreated());
+			if (cal.get(Calendar.YEAR) == year) {
+				list.add(message);
+			}
+		}
+		return list;
+	}
+
+	public List<Message> getAllMessages(int start, int size) {
+		List<Message> list = new ArrayList<Message>(messages.values());
+		if (start + size > list.size()) {
+			return new ArrayList<Message>();
+		}
+		return list.subList(start, start + size);
 	}
 
 }

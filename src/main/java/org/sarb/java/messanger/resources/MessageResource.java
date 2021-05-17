@@ -3,6 +3,7 @@ package org.sarb.java.messanger.resources;
 import java.util.List;
 
 import org.sarb.java.messanger.model.Message;
+import org.sarb.java.messanger.service.CommentService;
 import org.sarb.java.messanger.service.MessageService;
 
 import jakarta.ws.rs.*;
@@ -19,7 +20,17 @@ public class MessageResource {
 	MessageService messageService = new MessageService();
 
 	@GET	
-	public List<Message> getMessages() {
+	public List<Message> getMessages(@BeanParam MessageFilterBean filterBean ) {
+		
+		if(filterBean.getYear()>0)
+		{
+			return messageService.getAllMessages(filterBean.getYear());
+		}
+		
+		if(filterBean.getStart()>=0 && filterBean.getSize() >0)
+		{
+			return messageService.getAllMessages(filterBean.getStart(),filterBean.getSize());
+		}
 		return messageService.getAllMessages();
 	}
 
@@ -45,6 +56,12 @@ public class MessageResource {
 	@Path("/{messageId}")
 	public void deleteMessage(@PathParam("messageId") long id) {
 		messageService.removeMessage(id);
+	}
+	
+	@Path("/{messageId}/comments")
+	public CommentResource getCommentResource()
+	{
+		return new CommentResource();
 	}
 
 }
